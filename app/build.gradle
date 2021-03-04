@@ -1,5 +1,15 @@
 apply plugin: 'com.android.application'
 
+static def getProperty(String filename, String property) {
+    Properties properties = new Properties()
+    properties.load(new FileInputStream(filename))
+    return properties.getProperty(property)
+}
+
+static def quoted(String value) {
+    return "\"${value}\""
+}
+
 android {
     compileSdkVersion 30
     buildToolsVersion "29.0.3"
@@ -12,6 +22,18 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        def connection_properties = "$projectDir/../../../services/gallery.properties"
+
+        buildConfigField "String", "CLIENT_ID", quoted(
+                getProperty(connection_properties, "client_id")
+        )
+        buildConfigField "String", "BASE_URL", quoted(
+                getProperty(connection_properties, "base_url")
+        )
+        buildConfigField "String", "CONTENT_FORMAT", quoted(
+                getProperty(connection_properties, "content_format")
+        )
     }
 
     buildTypes {
@@ -23,6 +45,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
     }
 }
 
