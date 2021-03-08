@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.gallery.controller;
 
+import android.content.Intent;
 import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import edu.cnm.deepdive.gallery.R;
+import edu.cnm.deepdive.gallery.service.GoogleSignInService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,23 +34,31 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
-    // Inflate the menu; this adds items to the action bar if it is present.
-    getMenuInflater().inflate(R.menu.menu_main, menu);
+    super.onCreateOptionsMenu(menu);
+    getMenuInflater().inflate(R.menu.main_options, menu);
     return true;
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // Handle action bar item clicks here. The action bar will
-    // automatically handle clicks on the Home/Up button, so long
-    // as you specify a parent activity in AndroidManifest.xml.
-    int id = item.getItemId();
 
-    //noinspection SimplifiableIfStatement
-    if (id == R.id.action_settings) {
-      return true;
+    boolean handled = true;
+    switch (item.getItemId()) {
+      case R.id.sign_out:
+        logout();
+        break;
+      default:
+        handled = super.onOptionsItemSelected(item);
     }
+    return handled;
+  }
 
-    return super.onOptionsItemSelected(item);
+  private void logout() {
+    GoogleSignInService.getInstance().signOut()
+        .addOnCompleteListener((ignored) -> {
+          Intent intent = new Intent(this, LoginActivity.class)
+              .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+          startActivity(intent);
+        });
   }
 }

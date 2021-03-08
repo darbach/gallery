@@ -60,7 +60,7 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.3.3'
     implementation 'androidx.navigation:navigation-ui:2.3.3'
 
-    // Google Sign In
+    // Google Sign In dependency
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'androidx.wear:wear:1.0.0'
 
