@@ -60,9 +60,21 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment:2.3.3'
     implementation 'androidx.navigation:navigation-ui:2.3.3'
 
-    // Google Sign In dependency
+    // Google Sign In
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
     implementation 'androidx.wear:wear:1.0.0'
+
+    // Gson (Google JSON)
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // OkHttp logging
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+
+    // Retrofit (REST client for downloading JSON/XML)
+    def retrofit_version = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
