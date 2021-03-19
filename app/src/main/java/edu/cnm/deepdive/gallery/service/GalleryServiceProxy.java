@@ -26,14 +26,15 @@ public interface GalleryServiceProxy {
   Single<User> getProfile(@Header("authorization") String bearerToken);
 
   /**
-   * Uploading a file without a title or description.
+   * Uploading a file with a title and NO description.
    * @param bearerToken
    * @param file
    * @return
    */
   @Multipart
   @POST("images")
-  Single<Image> post(@Header("Authorization") String bearerToken, @Part MultipartBody.Part file);
+  Single<Image> post(@Header("Authorization") String bearerToken, @Part MultipartBody.Part file,
+      @Part("title") RequestBody title);
 
   /**
    * Uploading a file with both a title and description.

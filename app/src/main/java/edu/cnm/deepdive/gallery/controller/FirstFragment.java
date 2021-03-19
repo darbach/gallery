@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import edu.cnm.deepdive.gallery.NavGraphDirections;
+import edu.cnm.deepdive.gallery.NavGraphDirections.OpenUploadProperties;
 import edu.cnm.deepdive.gallery.R;
 import edu.cnm.deepdive.gallery.databinding.FragmentFirstBinding;
 
@@ -41,7 +44,8 @@ public class FirstFragment extends Fragment {
   public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
     if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-
+      OpenUploadProperties action = NavGraphDirections.openUploadProperties(data.getData());
+      Navigation.findNavController(binding.getRoot()).navigate(action);
     }
   }
 
