@@ -3,6 +3,7 @@ package edu.cnm.deepdive.gallery.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,15 +28,6 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
     setUpViewModel();
-
-    FloatingActionButton fab = findViewById(R.id.fab);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-            .setAction("Action", null).show();
-      }
-    });
   }
 
   private void setUpViewModel() {
@@ -69,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
     return handled;
   }
 
+  @Override
+  protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    super.onActivityResult(requestCode, resultCode, data);
+  }
+
   private void logout() {
     GoogleSignInService.getInstance().signOut()
         .addOnCompleteListener((ignored) -> {
@@ -77,4 +74,5 @@ public class MainActivity extends AppCompatActivity {
           startActivity(intent);
         });
   }
+
 }
