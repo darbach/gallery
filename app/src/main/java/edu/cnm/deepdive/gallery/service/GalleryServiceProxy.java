@@ -60,7 +60,7 @@ public interface GalleryServiceProxy {
           .excludeFieldsWithoutExposeAnnotation()
           .create();
       HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-      interceptor.setLevel(BuildConfig.DEBUG ? Level.BODY : Level.NONE);
+      interceptor.setLevel(BuildConfig.DEBUG ? Level.HEADERS : Level.NONE);
       OkHttpClient client = new OkHttpClient.Builder()
           .addInterceptor(interceptor)
           .build();
