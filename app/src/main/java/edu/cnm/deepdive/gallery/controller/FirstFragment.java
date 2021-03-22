@@ -23,13 +23,11 @@ public class FirstFragment extends Fragment {
   private FragmentFirstBinding binding;
 
   @Override
-  public View onCreateView(
-      LayoutInflater inflater, ViewGroup container,
-      Bundle savedInstanceState
-  ) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     binding = FragmentFirstBinding.inflate(inflater, container, false);
     binding.buttonFirst.setOnClickListener((v) ->
-        NavHostFragment.findNavController(FirstFragment.this)
+        NavHostFragment
+            .findNavController(FirstFragment.this)
             .navigate(R.id.action_FirstFragment_to_SecondFragment));
     binding.pickImage.setOnClickListener((v) -> pickImage());
     return binding.getRoot();
@@ -53,7 +51,7 @@ public class FirstFragment extends Fragment {
     Intent intent = new Intent();
     intent.setType("image/*");
     intent.setAction(Intent.ACTION_GET_CONTENT);
-    startActivityForResult(Intent.createChooser(intent, "Choose image to upload"), PICK_IMAGE_REQUEST);
+    startActivityForResult(Intent.createChooser(intent, getString(R.string.pick_image_title)), PICK_IMAGE_REQUEST);
   }
 
 }

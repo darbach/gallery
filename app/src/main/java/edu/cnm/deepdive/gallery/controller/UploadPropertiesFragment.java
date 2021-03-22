@@ -19,7 +19,6 @@ import edu.cnm.deepdive.gallery.R;
 import edu.cnm.deepdive.gallery.databinding.FragmentUploadPropertiesBinding;
 import edu.cnm.deepdive.gallery.viewmodel.MainViewModel;
 
-
 public class UploadPropertiesFragment extends DialogFragment implements TextWatcher {
 
   private FragmentUploadPropertiesBinding binding;
