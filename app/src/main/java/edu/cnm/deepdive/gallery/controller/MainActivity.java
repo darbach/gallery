@@ -2,17 +2,13 @@ package edu.cnm.deepdive.gallery.controller;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import android.view.View;
-
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 import edu.cnm.deepdive.gallery.R;
 import edu.cnm.deepdive.gallery.service.GoogleSignInService;
 import edu.cnm.deepdive.gallery.viewmodel.MainViewModel;
@@ -32,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
   private void setUpViewModel() {
     viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+    getLifecycle().addObserver(viewModel);
     viewModel.getThrowable().observe(this, (throwable) -> {
       if (throwable != null) {
         Toast.makeText(this, throwable.getLocalizedMessage(), Toast.LENGTH_LONG).show();
