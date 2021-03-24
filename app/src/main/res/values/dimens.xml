@@ -13,4 +13,6 @@
     -->
   <dimen name="inner_frame_layout_padding">5dp</dimen>
   <dimen name="half_static_spacing">8dp</dimen>
+  <dimen name="gallery_item_width">160dp</dimen>
+  <dimen name="half_dynamic_spacing">8dp</dimen>
 </resources>
