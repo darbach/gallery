@@ -10,7 +10,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -21,12 +20,13 @@ import edu.cnm.deepdive.gallery.NavGraphDirections;
 import edu.cnm.deepdive.gallery.NavGraphDirections.OpenUploadProperties;
 import edu.cnm.deepdive.gallery.R;
 import edu.cnm.deepdive.gallery.adapter.GalleryAdapter;
+import edu.cnm.deepdive.gallery.adapter.GalleryAdapter.OnGalleryClickHelper;
 import edu.cnm.deepdive.gallery.databinding.FragmentGalleryBinding;
 import edu.cnm.deepdive.gallery.model.Image;
 import edu.cnm.deepdive.gallery.viewmodel.MainViewModel;
 import java.util.List;
 
-public class GalleryFragment extends Fragment {
+public class GalleryFragment extends Fragment implements OnGalleryClickHelper {
 
   private static final int PICK_IMAGE_REQUEST = 1023;
   private MainViewModel viewModel;
@@ -62,21 +62,22 @@ public class GalleryFragment extends Fragment {
   @Override
   public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
     super.onActivityResult(requestCode, resultCode, data);
-    if(requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+    if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
       OpenUploadProperties action = NavGraphDirections.openUploadProperties(data.getData());
       Navigation.findNavController(binding.getRoot());
     }
   }
 
   @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+      Bundle savedInstanceState) {
     binding = FragmentGalleryBinding.inflate(inflater, container, false);
     Context context = getContext();
     int span = (int) Math.floor(context.getResources().getDisplayMetrics().widthPixels
         / context.getResources().getDimension(R.dimen.gallery_item_width));
     GridLayoutManager layoutManager = new GridLayoutManager(context, span);
     binding.galleryView.setLayoutManager(layoutManager);
-    adapter = new GalleryAdapter(context);
+//    adapter = new GalleryAdapter(context, galleries);
     binding.galleryView.setAdapter(adapter);
     binding.addImage.setOnClickListener((v) -> pickImage());
     return binding.getRoot();
@@ -99,17 +100,21 @@ public class GalleryFragment extends Fragment {
   }
 
   private void updateGallery(Image image) {
-    List<Image> images = adapter.getImages();
-    if (images != null && !images.contains(image)) {
-      images.add(0, image);
-      adapter.notifyItemInserted(0);
-    }
+//    List<Image> images = adapter.getImages();
+//    if (images != null && !images.contains(image)) {
+//      images.add(0, image);
+//      adapter.notifyItemInserted(0);
+//    }
   }
 
   private void updateGallery(List<Image> images) {
-    adapter.getImages().clear();
-    adapter.getImages().addAll(images);
+//    adapter.getImages().clear();
+//    adapter.getImages().addAll(images);
     adapter.notifyDataSetChanged();
   }
 
+  @Override
+  public void onGalleryClick(String galleryId, View view) {
+
+  }
 }
