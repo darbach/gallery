@@ -30,8 +30,6 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
-
   }
 
   @NonNull
