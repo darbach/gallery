@@ -30,13 +30,15 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    //noinspection ConstantConditions
-    uri = UploadPropertiesFragmentArgs.fromBundle(getArguments()).getContentUri();
+
+
   }
 
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+    //noinspection ConstantConditions
+    uri = UploadPropertiesFragmentArgs.fromBundle(getArguments()).getContentUri();
     binding = FragmentUploadPropertiesBinding.inflate(LayoutInflater.from(getContext()),
         null, false);
     dialog = new Builder(getContext())

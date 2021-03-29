@@ -64,8 +64,13 @@ public class GalleryAdapter extends RecyclerView.Adapter<Holder> {
       String description = image.getDescription();
       binding.title.setText((title != null) ? title : filename);
       if (description != null) {
+        binding.description.setText(description);
         binding.image.setContentDescription(description);
         binding.image.setTooltipText(description);
+      } else {
+        binding.description.setText("");
+        binding.image.setContentDescription("");
+        binding.image.setTooltipText("");
       }
     }
 
