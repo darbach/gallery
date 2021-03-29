@@ -61,7 +61,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<Holder> {
       gallery = galleries.get(position);
       binding.galleryTitle.setText(gallery.getTitle());
       binding.galleryDescription.setText(gallery.getDescription());
-      binding.getRoot().setOnClickListener(this);
+      binding.getRoot().setOnClickListener(this); //makes the RecyclerView item clickable
     }
 
     @Override

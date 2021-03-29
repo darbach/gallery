@@ -23,6 +23,7 @@ import edu.cnm.deepdive.gallery.adapter.GalleryAdapter;
 import edu.cnm.deepdive.gallery.adapter.GalleryAdapter.OnGalleryClickHelper;
 import edu.cnm.deepdive.gallery.databinding.FragmentGalleryBinding;
 import edu.cnm.deepdive.gallery.model.Image;
+import edu.cnm.deepdive.gallery.viewmodel.GalleryViewModel;
 import edu.cnm.deepdive.gallery.viewmodel.MainViewModel;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class GalleryFragment extends Fragment implements OnGalleryClickHelper {
 
   private static final int PICK_IMAGE_REQUEST = 1023;
   private MainViewModel viewModel;
+  private GalleryViewModel galleryViewModel;
   private GalleryAdapter adapter;
   private FragmentGalleryBinding binding;
 
@@ -72,13 +74,6 @@ public class GalleryFragment extends Fragment implements OnGalleryClickHelper {
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
       Bundle savedInstanceState) {
     binding = FragmentGalleryBinding.inflate(inflater, container, false);
-    Context context = getContext();
-    int span = (int) Math.floor(context.getResources().getDisplayMetrics().widthPixels
-        / context.getResources().getDimension(R.dimen.gallery_item_width));
-    GridLayoutManager layoutManager = new GridLayoutManager(context, span);
-    binding.galleryView.setLayoutManager(layoutManager);
-//    adapter = new GalleryAdapter(context, galleries);
-    binding.galleryView.setAdapter(adapter);
     binding.addImage.setOnClickListener((v) -> pickImage());
     return binding.getRoot();
   }
@@ -86,9 +81,14 @@ public class GalleryFragment extends Fragment implements OnGalleryClickHelper {
   @Override
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
+    //noinspection ConstantConditions
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
-    viewModel.getImage().observe(getViewLifecycleOwner(), this::updateGallery);
-    viewModel.getImages().observe(getViewLifecycleOwner(), this::updateGallery);
+    galleryViewModel = new ViewModelProvider(getActivity()).get(GalleryViewModel.class);
+    galleryViewModel.getGalleries().observe(getViewLifecycleOwner(), (galleries) -> {
+      if (galleries != null) {
+        binding.galleryView.setAdapter(new GalleryAdapter(getContext(), galleries, this));
+      }
+    });
   }
 
   private void pickImage() {
