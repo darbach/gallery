@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.gallery.controller;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.recyclerview.widget.GridLayoutManager;
 import edu.cnm.deepdive.gallery.NavGraphDirections;
 import edu.cnm.deepdive.gallery.NavGraphDirections.OpenUploadProperties;
 import edu.cnm.deepdive.gallery.R;
@@ -24,13 +22,13 @@ import edu.cnm.deepdive.gallery.adapter.GalleryAdapter.OnGalleryClickHelper;
 import edu.cnm.deepdive.gallery.databinding.FragmentGalleryBinding;
 import edu.cnm.deepdive.gallery.model.Image;
 import edu.cnm.deepdive.gallery.viewmodel.GalleryViewModel;
-import edu.cnm.deepdive.gallery.viewmodel.MainViewModel;
+import edu.cnm.deepdive.gallery.viewmodel.ImageViewModel;
 import java.util.List;
 
 public class GalleryFragment extends Fragment implements OnGalleryClickHelper {
 
   private static final int PICK_IMAGE_REQUEST = 1023;
-  private MainViewModel viewModel;
+  private ImageViewModel viewModel;
   private GalleryViewModel galleryViewModel;
   private GalleryAdapter adapter;
   private FragmentGalleryBinding binding;
@@ -82,7 +80,7 @@ public class GalleryFragment extends Fragment implements OnGalleryClickHelper {
   public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
     super.onViewCreated(view, savedInstanceState);
     //noinspection ConstantConditions
-    viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
+    viewModel = new ViewModelProvider(getActivity()).get(ImageViewModel.class);
     galleryViewModel = new ViewModelProvider(getActivity()).get(GalleryViewModel.class);
     galleryViewModel.getGalleries().observe(getViewLifecycleOwner(), (galleries) -> {
       if (galleries != null) {
@@ -115,6 +113,9 @@ public class GalleryFragment extends Fragment implements OnGalleryClickHelper {
 
   @Override
   public void onGalleryClick(String galleryId, View view) {
-
+    GalleryFragmentDirections.GalleryFragmentToImageFragment toImageFragment =
+        GalleryFragmentDirections.galleryFragmentToImageFragment(galleryId);
+    toImageFragment.setGalleryImages(galleryId);
+    Navigation.findNavController(view).navigate(toImageFragment);
   }
 }

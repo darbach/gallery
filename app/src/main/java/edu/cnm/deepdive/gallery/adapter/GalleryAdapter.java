@@ -22,7 +22,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<Holder> {
   public GalleryAdapter(Context context, List<Gallery> galleries,
       OnGalleryClickHelper onGalleryClickHelper) {
     this.context = context;
-    inflater = LayoutInflater.from(context);
+    this.inflater = LayoutInflater.from(context);
     this.onGalleryClickHelper = onGalleryClickHelper;
     this.galleries = galleries;
   }

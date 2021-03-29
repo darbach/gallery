@@ -18,14 +18,14 @@ import androidx.lifecycle.ViewModelProvider;
 import com.squareup.picasso.Picasso;
 import edu.cnm.deepdive.gallery.R;
 import edu.cnm.deepdive.gallery.databinding.FragmentUploadPropertiesBinding;
-import edu.cnm.deepdive.gallery.viewmodel.MainViewModel;
+import edu.cnm.deepdive.gallery.viewmodel.ImageViewModel;
 
 public class UploadPropertiesFragment extends DialogFragment implements TextWatcher {
 
   private FragmentUploadPropertiesBinding binding;
   private Uri uri;
   private AlertDialog dialog;
-  private MainViewModel viewModel;
+  private ImageViewModel viewModel;
 
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +65,7 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
         .into(binding.galleryImage);
     binding.galleryTitle.addTextChangedListener(this);
     //noinspection ConstantConditions
-    viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
+    viewModel = new ViewModelProvider(getActivity()).get(ImageViewModel.class);
     // TODO Observe as necessary.
   }
 

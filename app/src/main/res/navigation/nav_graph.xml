@@ -3,7 +3,7 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/nav_graph"
-  app:startDestination="@id/GalleryFragment">
+  app:startDestination="@id/gallery_fragment">
 
   <action
     android:id="@+id/open_upload_properties"
@@ -16,24 +16,27 @@
   </action>
 
   <fragment
-    android:id="@+id/GalleryFragment"
+    android:id="@+id/gallery_fragment"
     android:label="@string/gallery_fragment_label"
     android:name="edu.cnm.deepdive.gallery.controller.GalleryFragment"
     tools:layout="@layout/fragment_gallery">
 
     <action
-      android:id="@+id/action_GalleryFragment_to_SecondFragment"
-      app:destination="@id/SecondFragment"/>
+      android:id="@+id/gallery_fragment_to_image_fragment"
+      app:destination="@id/image_fragment"/>
   </fragment>
   <fragment
-    android:id="@+id/SecondFragment"
-    android:label="@string/second_fragment_label"
-    android:name="edu.cnm.deepdive.gallery.controller.SecondFragment"
-    tools:layout="@layout/fragment_second">
+    android:id="@+id/image_fragment"
+    android:label="@string/image_fragment_label"
+    android:name="edu.cnm.deepdive.gallery.controller.ImageFragment"
+    tools:layout="@layout/fragment_image">
 
     <action
-      android:id="@+id/action_SecondFragment_to_GalleryFragment"
-      app:destination="@id/GalleryFragment"/>
+      android:id="@+id/image_fragment_to_gallery_fragment"
+      app:destination="@id/gallery_fragment"/>
+    <argument
+      android:name="gallery_images"
+      app:argType="string"/>
   </fragment>
 
   <dialog
