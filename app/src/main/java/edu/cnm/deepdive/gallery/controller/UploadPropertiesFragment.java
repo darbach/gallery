@@ -62,8 +62,8 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
     Picasso
         .get()
         .load(uri)
-        .into(binding.image);
-    binding.title.addTextChangedListener(this);
+        .into(binding.galleryImage);
+    binding.galleryTitle.addTextChangedListener(this);
     //noinspection ConstantConditions
     viewModel = new ViewModelProvider(getActivity()).get(MainViewModel.class);
     // TODO Observe as necessary.
@@ -83,13 +83,13 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
   private void checkSubmitConditions() {
     Button positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
     //noinspection ConstantConditions
-    positive.setEnabled(!binding.title.getText().toString().trim().isEmpty());
+    positive.setEnabled(!binding.galleryTitle.getText().toString().trim().isEmpty());
   }
 
   @SuppressWarnings("ConstantConditions")
   private void upload() {
-    String title = binding.title.getText().toString().trim();
-    String description = binding.description.getText().toString().trim();
+    String title = binding.galleryTitle.getText().toString().trim();
+    String description = binding.galleryDescription.getText().toString().trim();
     viewModel.store(uri, title, (description.isEmpty() ? null : description));
   }
 

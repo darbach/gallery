@@ -22,4 +22,6 @@
   <string name="title_hint">Title of image*</string>
   <string name="description_hint">Description of image</string>
   <string name="pick_image_title">Choose image to upload</string>
+  <string name="gallery_title">Title</string>
+  <string name="description">Description</string>
 </resources>

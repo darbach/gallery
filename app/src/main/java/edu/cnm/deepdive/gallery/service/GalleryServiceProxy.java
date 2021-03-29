@@ -3,10 +3,12 @@ package edu.cnm.deepdive.gallery.service;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.cnm.deepdive.gallery.BuildConfig;
+import edu.cnm.deepdive.gallery.model.Gallery;
 import edu.cnm.deepdive.gallery.model.Image;
 import edu.cnm.deepdive.gallery.model.User;
 import io.reactivex.Single;
 import java.util.List;
+import java.util.UUID;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
@@ -20,6 +22,7 @@ import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public interface GalleryServiceProxy {
 
@@ -39,7 +42,7 @@ public interface GalleryServiceProxy {
 
   /**
    * Uploading a file with both a title and description.
-   * @param bearerToken
+   * @param bearerToken authentication token
    * @param file
    * @return
    */
@@ -55,6 +58,12 @@ public interface GalleryServiceProxy {
    */
   @GET("images")
   Single<List<Image>> getAllImages(@Header("Authorization") String bearerToken);
+
+  @GET("galleries/{id}")
+  Single<Gallery> getGallery(@Path("id") UUID id, @Header("Authorization") String bearerToken);
+
+  @GET("galleries")
+  Single<List<Gallery>> getGalleries(@Header("Authorization") String bearerToken);
 
   static GalleryServiceProxy getInstance() {
     return InstanceHolder.INSTANCE;
