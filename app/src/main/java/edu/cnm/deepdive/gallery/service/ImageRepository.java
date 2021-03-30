@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.UUID;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -35,7 +36,7 @@ public class ImageRepository {
   }
 
   @SuppressWarnings("BlockingMethodInNonBlockingContext")
-  public Single<Image> add(Uri uri, String title, String description) {
+  public Single<Image> add(UUID galleryId, Uri uri, String title, String description) {
     File[] filesCreated = new File[1];
     return signInService
         .refreshBearerToken()
@@ -60,9 +61,9 @@ public class ImageRepository {
             RequestBody titlePart = RequestBody.create(title, multipartFormType);//title of multipart
             if (description !=  null) {//post w/description of multipart
               RequestBody descriptionPart = RequestBody.create(description, multipartFormType);
-              return serviceProxy.post(token, filePart, titlePart, descriptionPart);
+              return serviceProxy.post(galleryId, token, filePart, titlePart, descriptionPart);
             } else {//post w/out description
-              return serviceProxy.post(token, filePart, titlePart);
+              return serviceProxy.post(galleryId, token, filePart, titlePart);
             }
           }
         })

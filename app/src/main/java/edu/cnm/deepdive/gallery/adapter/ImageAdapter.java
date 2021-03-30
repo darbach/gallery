@@ -73,11 +73,13 @@ public class ImageAdapter extends RecyclerView.Adapter<Holder> {
     public void onClick(View view) {
       onImageClickHelper.onImageClick(images.get(getAdapterPosition()), getAdapterPosition());
     }
+
   }
 
   public interface OnImageClickHelper {
 
     void onImageClick(Image image, int position);
+
   }
 
 }

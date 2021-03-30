@@ -90,7 +90,7 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
   private void upload() {
     String title = binding.galleryTitle.getText().toString().trim();
     String description = binding.galleryDescription.getText().toString().trim();
-    viewModel.store(uri, title, (description.isEmpty() ? null : description));
+//    viewModel.store(uri, title, (description.isEmpty() ? null : description));
   }
 
 }

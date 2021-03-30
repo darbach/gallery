@@ -4,15 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import edu.cnm.deepdive.gallery.adapter.ImageAdapter;
+import edu.cnm.deepdive.gallery.adapter.ImageAdapter.OnImageClickHelper;
 import edu.cnm.deepdive.gallery.databinding.FragmentImageBinding;
-import edu.cnm.deepdive.gallery.viewmodel.ImageViewModel;
+import edu.cnm.deepdive.gallery.model.Image;
+import edu.cnm.deepdive.gallery.viewmodel.GalleryViewModel;
 import java.util.UUID;
 
-public class ImageFragment extends Fragment {
+public class ImageFragment extends Fragment implements OnImageClickHelper {
 
   private FragmentImageBinding binding;
-  private ImageViewModel viewModel;
+  private GalleryViewModel galleryViewModel;
   private UUID galleryId;
 
   @Override
@@ -29,6 +35,24 @@ public class ImageFragment extends Fragment {
     return binding.getRoot();
   }
 
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    galleryViewModel = new ViewModelProvider(getActivity()).get(GalleryViewModel.class);
+    if (getArguments() != null) {
+      ImageFragmentArgs args = ImageFragmentArgs.fromBundle(getArguments());
+      galleryId = UUID.fromString(args.getGalleryImages());
+    }
+    galleryViewModel.getGallery(galleryId);
+    galleryViewModel.getGallery().observe(getViewLifecycleOwner(), (gallery) -> {
+      if (gallery != null) {
+        binding.imageView.setAdapter(new ImageAdapter(getContext(), gallery.getImages(), this));
+      }
+    });
+  }
 
+  @Override
+  public void onImageClick(Image image, int position) {
 
+  }
 }
