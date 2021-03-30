@@ -26,4 +26,5 @@
   <string name="description">Description</string>
   <string name="image_title">Image title</string>
   <string name="image_description">Image description</string>
+  <string name="gallery_title_in_image">Gallery title in image</string>
 </resources>
