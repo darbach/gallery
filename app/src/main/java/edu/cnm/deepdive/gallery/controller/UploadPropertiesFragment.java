@@ -36,13 +36,13 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    //noinspection ConstantConditions
+    uri = UploadPropertiesFragmentArgs.fromBundle(getArguments()).getContentUri();
   }
 
   @NonNull
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-    //noinspection ConstantConditions
-    uri = UploadPropertiesFragmentArgs.fromBundle(getArguments()).getContentUri();
     binding = FragmentUploadPropertiesBinding.inflate(LayoutInflater.from(getContext()),
         null, false);
     dialog = new Builder(getContext())
@@ -75,8 +75,9 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
     binding.galleryTitle.addTextChangedListener(this);
     //noinspection ConstantConditions
     imageViewModel = new ViewModelProvider(getActivity()).get(ImageViewModel.class);
+    galleryViewModel = new ViewModelProvider(getActivity()).get(GalleryViewModel.class);
     galleryViewModel.getGalleries().observe(getViewLifecycleOwner(),
-        (galleries) -> this.galleries = galleries);
+        (galleries) -> UploadPropertiesFragment.this.galleries = galleries);
   }
 
   @Override
@@ -93,12 +94,12 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
   private void checkSubmitConditions() {
     Button positive = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
     //noinspection ConstantConditions
-    positive.setEnabled(!binding.galleryTitle.getText().toString().trim().isEmpty());
+    positive.setEnabled(!binding.imageTitle.getText().toString().trim().isEmpty());
   }
 
   @SuppressWarnings("ConstantConditions")
   private void upload() {
-    String title = binding.galleryTitle.getText().toString().trim();
+    String title = binding.imageTitle.getText().toString().trim();
     String description = binding.imageDescription.getText().toString().trim();
     String galleryTitle = binding.galleryTitle.getText().toString().trim();
     String titleId = "";

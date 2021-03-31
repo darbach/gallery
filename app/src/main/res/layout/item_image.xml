@@ -11,22 +11,19 @@
     android:id="@+id/image_gallery"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/half_dynamic_spacing"
-    android:scaleType="centerInside"
+    android:scaleType="fitCenter"
     android:adjustViewBounds="true"
-    app:layout_constraintHorizontal_weight="1"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintEnd_toStartOf="@id/image_title"/>
 
   <TextView
     android:id="@+id/image_title"
-    android:layout_width="wrap_content"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/half_dynamic_spacing"
     android:text="@string/image_title"
     style="@style/TitleText"
-    app:layout_constraintHorizontal_weight="3"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toEndOf="@id/image_gallery"
     app:layout_constraintEnd_toEndOf="parent"/>
