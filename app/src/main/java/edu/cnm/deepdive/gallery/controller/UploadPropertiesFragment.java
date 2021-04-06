@@ -75,7 +75,7 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
     Picasso
         .get()
         .load(uri)
-        .into(binding.galleryImage);
+        .into(binding.image);
     //noinspection ConstantConditions
     imageViewModel = new ViewModelProvider(getActivity()).get(ImageViewModel.class);
     galleryViewModel = new ViewModelProvider(getActivity()).get(GalleryViewModel.class);
@@ -85,7 +85,7 @@ public class UploadPropertiesFragment extends DialogFragment implements TextWatc
           AutoCompleteTextView simpleAutoText = binding.galleryTitle;
           ArrayAdapter<Gallery> adapter = new ArrayAdapter<>(
               getContext(), android.R.layout.simple_list_item_1, galleries);
-          simpleAutoText.setThreshold(5); //max number of gallery titles to show as you type
+          simpleAutoText.setThreshold(1); //max number of gallery titles to show as you type
           simpleAutoText.setAdapter(adapter);
         });
   }
