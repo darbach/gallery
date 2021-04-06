@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.gallery.model;
 
+import androidx.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Date;
@@ -96,5 +97,11 @@ public class Gallery implements Serializable {
 
   public void setImages(List<Image> images) {
     this.images = images;
+  }
+
+  @NonNull
+  @Override
+  public String toString() {
+    return title;
   }
 }

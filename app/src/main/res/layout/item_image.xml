@@ -28,17 +28,17 @@
     app:layout_constraintStart_toEndOf="@id/image_gallery"
     app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
-      android:id="@+id/image_description"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_margin="@dimen/half_dynamic_spacing"
-      android:gravity="start"
-      android:text="@string/image_description"
-      style="@style/DescriptionText"
-      app:layout_constraintTop_toBottomOf="@id/image_title"
-      app:layout_constraintStart_toStartOf="@id/image_title"
-      app:layout_constraintEnd_toEndOf="@id/image_title"/>
+  <TextView
+    android:id="@+id/image_description"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/half_dynamic_spacing"
+    android:gravity="start"
+    android:text="@string/image_description"
+    style="@style/DescriptionText"
+    app:layout_constraintTop_toBottomOf="@id/image_title"
+    app:layout_constraintStart_toStartOf="@id/image_title"
+    app:layout_constraintEnd_toEndOf="@id/image_title"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
